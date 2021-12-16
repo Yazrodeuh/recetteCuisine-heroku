@@ -1,5 +1,5 @@
 const database = require("./requestDatabase");
-
+const dbName = "recipe";
 
 /**
  *
@@ -7,7 +7,7 @@ const database = require("./requestDatabase");
  * @param res
  */
 function selectAll(req, res){
-    database.selectAll("recipe", req, res);
+    database.selectAll(dbName, req, res);
 }
 
 module.exports = {
