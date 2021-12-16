@@ -25,7 +25,13 @@ function selectAll(url, req, res){
         .catch(err => res.json(err));
 }
 
-
+/**
+ *
+ * @param id
+ * @param dbName
+ * @param req
+ * @param res
+ */
 function selectOne(id, dbName, req, res){
     selectAll(dbName + "?q={id:" + id, req, res);
 }

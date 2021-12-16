@@ -10,6 +10,11 @@ function selectAll(req, res){
     database.selectAll(dbName, req, res);
 }
 
+/**
+ *
+ * @param req
+ * @param res
+ */
 function selectOne(req, res){
     database.selectOne(req.query.id, dbName, req, res);
 }
