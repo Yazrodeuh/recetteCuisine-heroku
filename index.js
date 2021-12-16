@@ -17,6 +17,11 @@ const ingredient = require("./database/ingredient.js");
 app.get('/ingredients', ingredient.selectAll);
 
 
+//INGREDIENT
+const recipeIngredient = require("./database/recipe-ingredient.js");
+app.get('/test', recipeIngredient.selectCompleteRecipe);
+
+
 
 
 
