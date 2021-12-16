@@ -11,8 +11,8 @@ app.get('/', function (req, res){
 })
 
 
-const recipe = require("database/recipe.js");
-app.get('/recipe', recipe.selecAll);
+const recipe = require("/database/recipe.js");
+app.get('/recipe', recipe.selectAll);
 
 
 

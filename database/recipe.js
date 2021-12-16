@@ -1,7 +1,7 @@
 const {requestDB} = require("./requestDatabase");
 
 
-function selecAll(req, res){
+function selectAll(req, res){
     requestDB("recipe")
         .then(r => res.json(r.data))
         .catch(err => res.json(err));
@@ -10,7 +10,7 @@ function selecAll(req, res){
 
 
 module.exports = {
-    selecAll: selecAll
+    selectAll: selectAll
 }
 
 
