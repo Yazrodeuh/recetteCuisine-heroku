@@ -13,7 +13,7 @@ function selectAll(req, res){
 
 function selectCompleteRecipe(req, res){
 
-    database.select(dbName + "?q={\"recipe\":{\"id\":" + req.params.id + "}}", req, res);
+    database.select(dbName + "?q={\"recipe.0\":{\"id\":" + req.params.id + "}}", req, res);
 
 
 
