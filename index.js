@@ -11,6 +11,14 @@ app.get('/', function (req, res){
 })
 
 
+const recipe = require("database/recipe.js");
+app.get('/recipe', recipe.selecAll);
+
+
+
+
+
+
 app.listen(PORT, function () {
     console.log('Example app listening on port ' + PORT)
 })
