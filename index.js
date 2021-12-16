@@ -6,16 +6,13 @@ const axios = require("axios")
 
 
 
+app.get('/', function (req, res){
+    app.send('Homepage')
+})
 
 
+app.listen(PORT, function () {
+    console.log('Example app listening on port ' + PORT)
+})
 
 
-
-
-async function requestDB(url){
-    return await axios.get("https://recettecuisine-d83f.restdb.io/rest/" + url, {
-        headers: {
-            "x-apikey": process.env.XAPIKEY
-        }
-    })
-}
