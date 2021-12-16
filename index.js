@@ -9,10 +9,13 @@ app.get('/', function (req, res){
     res.send('Homepage')
 })
 
-
+//RECIPE
 const recipe = require("./database/recipe.js");
-app.get('/recipe', recipe.selectAll);
+app.get('/recipes', recipe.selectAll);
 
+//INGREDIENT
+const ingredient = require("./database/ingredient.js");
+app.get('/ingredients', ingredient.selectAll);
 
 
 

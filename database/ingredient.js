@@ -9,7 +9,7 @@ function selectAll(req, res){
 
 
 module.exports = {
-    selectAll: selectAll
+    selectAll
 }
 
 
