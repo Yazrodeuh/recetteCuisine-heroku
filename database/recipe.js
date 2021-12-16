@@ -1,18 +1,18 @@
-const {requestDB} = require("./requestDatabase");
+const database = require("./requestDatabase");
 
 
+/**
+ *
+ * @param req
+ * @param res
+ */
 function selectAll(req, res){
-    requestDB("recipe")
-        .then(r => res.json(r.data))
-        .catch(err => res.json(err));
+    database.selectAll("recipe", req, res);
 }
-
-
 
 module.exports = {
     selectAll
 }
-
 
 
 

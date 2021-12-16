@@ -6,7 +6,7 @@ const database = require("./requestDatabase");
  * @param res
  */
 function selectAll(req, res){
-    database.selectAll("ingredient", req, res);
+    database.selectAll("recipe-ingredient", req, res);
 }
 
 module.exports = {
