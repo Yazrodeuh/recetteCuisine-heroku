@@ -20,7 +20,7 @@ app.get('/ingredients', ingredient.selectAll);
 //INGREDIENT
 const recipeIngredient = require("./database/recipe-ingredient.js");
 app.get('/test/:id', recipeIngredient.selectCompleteRecipe);
-
+app.get("/test", recipeIngredient.selectAll);
 
 
 

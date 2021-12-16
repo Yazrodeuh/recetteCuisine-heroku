@@ -1,7 +1,5 @@
 const database = require("./requestDatabase");
 const dbName = "recipe-ingredient"
-const recipe = require('./recipe.js');
-const ingredient = require("./ingredient.js")
 
 /**
  *
