@@ -7,7 +7,7 @@ const axios = require("axios")
 
 
 app.get('/', function (req, res){
-    app.send('Homepage')
+    res.send('Homepage')
 })
 
 
