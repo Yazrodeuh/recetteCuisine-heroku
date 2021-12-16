@@ -7,7 +7,7 @@ const dbName = "user-list"
  * @param res
  */
 function selectAll(req, res){
-    database.selectAll(dbName, req, res);
+    database.select(dbName, req, res);
 }
 
 module.exports = {

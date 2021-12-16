@@ -7,7 +7,7 @@ const dbName = "ingredient"
  * @param res
  */
 function selectAll(req, res){
-    database.selectAll(dbName, req, res);
+    database.select(dbName, req, res);
 }
 
 /**
@@ -21,7 +21,7 @@ function selectOne(req, res){
 
 
 module.exports = {
-    selectAll
+    selectAll, selectOne
 }
 
 

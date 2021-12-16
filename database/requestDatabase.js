@@ -19,7 +19,7 @@ async function request(url){
  * @param req
  * @param res
  */
-function selectAll(url, req, res){
+function select(url, req, res){
     request(url)
         .then(r => res.json(r.data))
         .catch(err => res.json(err));
@@ -33,12 +33,12 @@ function selectAll(url, req, res){
  * @param res
  */
 function selectOne(id, dbName, req, res){
-    selectAll(dbName + "?q={id:" + id, req, res);
+    select(dbName + "?q={id:" + id + "}", req, res);
 }
 
 
 
 
 module.exports = {
-    request, selectAll, selectOne
+    request, select, selectOne
 }
