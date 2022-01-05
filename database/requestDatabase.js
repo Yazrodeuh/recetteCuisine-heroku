@@ -1,16 +1,19 @@
 const axios = require("axios");
 
+const url = 'https://recettecuisine-d83f.restdb.io/rest/';
+const headers = {
+    headers: {
+        "x-apikey": "92b2bae27ab0b1d2f3fb12ae20167b71425d6"
+    }
+}
+
 /**
  *
- * @param url
+ * @param tableName
  * @returns {Promise<AxiosResponse<any>>}
  */
-async function request(url){
-    return await axios.get("https://recettecuisine-d83f.restdb.io/rest/" + url, {
-        headers: {
-            "x-apikey": process.env.XAPIKEY
-        }
-    })
+async function request(tableName) {
+    return await axios.get(url + tableName, headers)
 }
 
 /**
@@ -19,7 +22,7 @@ async function request(url){
  * @param req
  * @param res
  */
-function select(url, req, res){
+function select(url, req, res) {
     request(url)
         .then(r => res.json(r.data))
         .catch(err => res.json(err));
@@ -32,13 +35,11 @@ function select(url, req, res){
  * @param req
  * @param res
  */
-function selectOne(id, dbName, req, res){
+function selectOne(id, dbName, req, res) {
     select(dbName + "?q={id:" + id + "}", req, res);
 }
 
 
-
-
 module.exports = {
-    request, select, selectOne
+    request, select, selectOne,url,headers
 }
