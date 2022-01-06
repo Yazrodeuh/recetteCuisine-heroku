@@ -2,13 +2,14 @@ const express = require('express')
 const app = express()
 const cors = require('cors');
 const bodyParser = require('body-parser');
+const authentification = require('./authentification/authentification.js');
 
 app.use(cors());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(express.json());
+app.use(authentification.passeport.initialize)
 require("dotenv").config();
 const PORT = process.env.PORT || 8000// this is very important
-
 
 
 app.get('/', function (req, res){
@@ -19,7 +20,6 @@ app.get('/error',(req,res) => {
     res.status(501);
     res.json({error: true});
 })
-
 
 //RECIPE
 const recipe = require("./database/recipe.js");
@@ -37,7 +37,6 @@ app.post('/ingredient', ingredient.createObj);
 app.put('/ingredient', ingredient.updateObj);
 app.delete('/ingredient', ingredient.deleteObj);
 
-
 //RECIPE INGREDIENT
 const recipeIngredient = require("./database/recipeIngredient.js");
 app.get('/recipeIngredients', recipeIngredient.selectAll);
@@ -54,6 +53,15 @@ app.post('/step', step.createObj);
 app.put('/step', step.updateObj);
 app.delete('/step', step.deleteObj);
 
+//TEST authentification
+app.post('/login', (req, res) =>{
+    const result = authentification.login(req.body.email, req.body.password);
+    res.status(result.status);
+    res.json(result.message);
+})
+app.get('/private', authentification.passeport.authenticate('jwt', {session: false}), (req, res) => {
+    res.send('private. user : ' + req.user.email);
+})
 
 app.listen(PORT, function () {
     console.log('Example app listening on port ' + PORT)
