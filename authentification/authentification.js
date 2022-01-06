@@ -26,9 +26,9 @@ passeport.use(
 
 /**
  *
- * @param email
- * @param password
- * @returns {{message: string, status: number}|{message: (*), status: number}}
+ * @param {string} email
+ * @param {string} password
+ * @returns {{message: string, status: number}}
  */
 function login(email, password){
 
