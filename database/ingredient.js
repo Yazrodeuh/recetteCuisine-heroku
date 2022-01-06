@@ -1,14 +1,21 @@
 const database = require("./requestDatabase");
 const axios = require("axios");
-const dbName = "ingredient"
+const tableName = "ingredient"
 
 /**
  *
  * @param req
  * @param res
  */
-function selectAll(req, res){
-    database.select(dbName, req, res);
+function selectAll(req, res) {
+    database.selectAll(tableName)
+        .then((r) => {
+            res.json(r.data);
+        })
+        .catch((e) => {
+            res.statusCode(500)
+            res.json(e);
+        });
 }
 
 /**
@@ -16,22 +23,73 @@ function selectAll(req, res){
  * @param req
  * @param res
  */
-function selectOne(req, res){
-    database.selectOne(req.query.id, dbName, req, res);
+function selectOne(req, res) {
+    database.selectOneById(tableName, req.query.id)
+        .then((r) => {
+            res.json(r.data);
+        })
+        .catch((e) => {
+            res.statusCode(500)
+            res.json(e);
+        });
 }
 
-function create(req,res) {
-    axios.post(database.url + dbName,req.body,database.headers).then(r => {
-        res.json("ingredient created");
-    }).catch(err => {
-        res.statusCode(500);
-        res.json(err)
-    })
+/**
+ *
+ * @param req
+ * @param res
+ */
+function createObj(req, res) {
+    database.createObj(tableName, req.body)
+        .then((result) => {
+            res.json(result.data);
+        })
+        .catch((error) => {
+            res.statusCode(500)
+            res.json(error);
+        });
 }
+
+/**
+ *
+ * @param req
+ * @param res
+ */
+function updateObj(req, res) {
+    database.updateObj(tableName, req.body)
+        .then((result) => {
+            res.json(result.data);
+        })
+        .catch((error) => {
+            res.statusCode(500)
+            res.json(error);
+        });
+}
+
+/**
+ *
+ * @param req
+ * @param res
+ */
+function deleteObj(req, res){
+    database.deleteObj(tableName, req.query.id)
+        .then((result) => {
+            res.json(result.data);
+        })
+        .catch((error) => {
+            res.statusCode(500)
+            res.json(error);
+        });
+}
+
 
 
 module.exports = {
-    selectAll, selectOne, create
+    selectAll,
+    selectOne,
+    createObj,
+    updateObj,
+    deleteObj
 }
 
 

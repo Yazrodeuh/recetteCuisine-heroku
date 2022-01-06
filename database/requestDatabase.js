@@ -8,38 +8,64 @@ const headers = {
 }
 
 /**
+ * SelectAll
  *
  * @param tableName
  * @returns {Promise<AxiosResponse<any>>}
  */
-async function request(tableName) {
-    return await axios.get(url + tableName, headers)
+async function selectAll(tableName) {
+    return await axios.get(url + tableName, headers);
 }
 
 /**
+ * Select one item in a database with an id
  *
- * @param url
- * @param req
- * @param res
- */
-function select(url, req, res) {
-    request(url)
-        .then(r => res.json(r.data))
-        .catch(err => res.json(err));
-}
-
-/**
- *
+ * @param tableName
  * @param id
- * @param dbName
- * @param req
- * @param res
  */
-function selectOne(id, dbName, req, res) {
-    select(dbName + "?q={id:" + id + "}", req, res);
+async function selectOneById(tableName, id) {
+    return await axios.get(url + tableName + "?q={id:" + id + "}", headers);
+}
+
+
+/**
+ * Insert object in Database
+ *
+ * @param tableName
+ * @param data
+ * @returns {Promise<AxiosResponse<any>>}
+ */
+async function createObj(tableName, data){
+    return await axios.post(url + tableName, data, headers);
+}
+
+/**
+ * Update object in Database
+ *
+ * @param tableName
+ * @param data
+ * @returns {Promise<AxiosResponse<any>>}
+ */
+async function updateObj(tableName, data){
+    return await axios.put(url + tableName, data, headers);
+}
+
+/**
+ * Delete object in Database
+ *
+ * @param tableName
+ * @param id
+ * @returns {Promise<AxiosResponse<any>>}
+ */
+async function deleteObj(tableName, id){
+    return await axios.delete(url + tableName + "?q={id:" + id + "}", headers);
 }
 
 
 module.exports = {
-    request, select, selectOne,url,headers
+    selectAll,
+    selectOneById,
+    createObj,
+    updateObj,
+    deleteObj
 }
