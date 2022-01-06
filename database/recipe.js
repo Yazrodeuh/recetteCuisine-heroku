@@ -1,13 +1,13 @@
 const database = require("./requestDatabase");
-const dbName = "recipe";
+const tableName = "recipe";
 
 /**
  *
  * @param req
  * @param res
  */
-function selectAll(req, res){
-    database.select(dbName, req, res);
+async function selectAll(req, res) {
+    await database.selectAll(tableName, req, res);
 }
 
 /**
@@ -15,15 +15,48 @@ function selectAll(req, res){
  * @param req
  * @param res
  */
-function selectOne(req, res){
-    database.selectOne(req.query.id, dbName, req, res);
+async function selectOneById(req, res) {
+    await database.selectOneById(tableName, req.query.id, req, res)
 }
 
+/**
+ *
+ * @param req
+ * @param res
+ */
+async function createObj(req, res) {
+    await database.createObj(tableName, req.body, req, res)
+
+}
+
+/**
+ *
+ * @param req
+ * @param res
+ */
+async function updateObj(req, res) {
+    await database.updateObj(tableName, req.body, req, res);
+}
+
+/**
+ *
+ * @param req
+ * @param res
+ */
+async function deleteObj(req, res){
+    await database.deleteObj(tableName, req.query.id, req, res)
+
+}
+
+
+/**
+ *
+ * @type {{createObj: ((function(*, *): Promise<void>)|*), selectAll: ((function(*, *): Promise<void>)|*), deleteObj: ((function(*, *): Promise<void>)|*), selectOneById: ((function(*, *): Promise<void>)|*), updateObj: ((function(*, *): Promise<void>)|*)}}
+ */
 module.exports = {
-    selectAll, selectOne
+    selectAll,
+    selectOneById,
+    createObj,
+    updateObj,
+    deleteObj
 }
-
-
-
-
-

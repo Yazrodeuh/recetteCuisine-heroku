@@ -11,10 +11,19 @@ const headers = {
  * SelectAll
  *
  * @param tableName
+ * @param req
+ * @param res
  * @returns {Promise<AxiosResponse<any>>}
  */
-async function selectAll(tableName) {
-    return await axios.get(url + tableName, headers);
+function selectAll(tableName, req, res) {
+    axios.get(url + tableName, headers)
+        .then((r) => {
+            res.json(r.data);
+        })
+        .catch((e) => {
+            res.statusCode(500)
+            res.json(e);
+        });
 }
 
 /**
@@ -22,9 +31,18 @@ async function selectAll(tableName) {
  *
  * @param tableName
  * @param id
+ * @param req
+ * @param res
  */
-async function selectOneById(tableName, id) {
-    return await axios.get(url + tableName + "?q={id:" + id + "}", headers);
+function selectOneById(tableName, id, req, res) {
+    axios.get(url + tableName + "?q={id:" + id + "}", headers)
+        .then((r) => {
+            res.json(r.data);
+        })
+        .catch((e) => {
+            res.statusCode(500)
+            res.json(e);
+        });
 }
 
 
@@ -33,10 +51,19 @@ async function selectOneById(tableName, id) {
  *
  * @param tableName
  * @param data
+ * @param req
+ * @param res
  * @returns {Promise<AxiosResponse<any>>}
  */
-async function createObj(tableName, data){
-    return await axios.post(url + tableName, data, headers);
+async function createObj(tableName, data, req, res) {
+    return await axios.post(url + tableName, data, headers)
+        .then((result) => {
+            res.json(result.data);
+        })
+        .catch((error) => {
+            res.statusCode(500)
+            res.json(error);
+        });
 }
 
 /**
@@ -44,10 +71,19 @@ async function createObj(tableName, data){
  *
  * @param tableName
  * @param data
+ * @param req
+ * @param res
  * @returns {Promise<AxiosResponse<any>>}
  */
-async function updateObj(tableName, data){
-    return await axios.put(url + tableName, data, headers);
+async function updateObj(tableName, data, req, res) {
+    return await axios.put(url + tableName, data, headers)
+        .then((result) => {
+            res.json(result.data);
+        })
+        .catch((error) => {
+            res.statusCode(500)
+            res.json(error);
+        });
 }
 
 /**
@@ -55,17 +91,22 @@ async function updateObj(tableName, data){
  *
  * @param tableName
  * @param id
+ * @param req
+ * @param res
  * @returns {Promise<AxiosResponse<any>>}
  */
-async function deleteObj(tableName, id){
-    return await axios.delete(url + tableName + "?q={id:" + id + "}", headers);
+async function deleteObj(tableName, id, req, res) {
+    return await axios.delete(url + tableName + "?q={id:" + id + "}", headers)
+        .then((result) => {
+            res.json(result.data);
+        })
+        .catch((error) => {
+            res.statusCode(500)
+            res.json(error);
+        });
 }
 
 
 module.exports = {
-    selectAll,
-    selectOneById,
-    createObj,
-    updateObj,
-    deleteObj
+    selectAll, selectOneById, createObj, updateObj, deleteObj
 }

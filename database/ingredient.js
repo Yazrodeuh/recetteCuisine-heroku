@@ -1,5 +1,4 @@
 const database = require("./requestDatabase");
-const axios = require("axios");
 const tableName = "ingredient"
 
 /**
@@ -7,15 +6,8 @@ const tableName = "ingredient"
  * @param req
  * @param res
  */
-function selectAll(req, res) {
-    database.selectAll(tableName)
-        .then((r) => {
-            res.json(r.data);
-        })
-        .catch((e) => {
-            res.statusCode(500)
-            res.json(e);
-        });
+async function selectAll(req, res) {
+    await database.selectAll(tableName, req, res);
 }
 
 /**
@@ -23,15 +15,8 @@ function selectAll(req, res) {
  * @param req
  * @param res
  */
-function selectOne(req, res) {
-    database.selectOneById(tableName, req.query.id)
-        .then((r) => {
-            res.json(r.data);
-        })
-        .catch((e) => {
-            res.statusCode(500)
-            res.json(e);
-        });
+async function selectOneById(req, res) {
+    await database.selectOneById(tableName, req.query.id, req, res)
 }
 
 /**
@@ -39,15 +24,9 @@ function selectOne(req, res) {
  * @param req
  * @param res
  */
-function createObj(req, res) {
-    database.createObj(tableName, req.body)
-        .then((result) => {
-            res.json(result.data);
-        })
-        .catch((error) => {
-            res.statusCode(500)
-            res.json(error);
-        });
+async function createObj(req, res) {
+    await database.createObj(tableName, req.body, req, res)
+
 }
 
 /**
@@ -55,15 +34,8 @@ function createObj(req, res) {
  * @param req
  * @param res
  */
-function updateObj(req, res) {
-    database.updateObj(tableName, req.body)
-        .then((result) => {
-            res.json(result.data);
-        })
-        .catch((error) => {
-            res.statusCode(500)
-            res.json(error);
-        });
+async function updateObj(req, res) {
+    await database.updateObj(tableName, req.body, req, res);
 }
 
 /**
@@ -71,22 +43,19 @@ function updateObj(req, res) {
  * @param req
  * @param res
  */
-function deleteObj(req, res){
-    database.deleteObj(tableName, req.query.id)
-        .then((result) => {
-            res.json(result.data);
-        })
-        .catch((error) => {
-            res.statusCode(500)
-            res.json(error);
-        });
+async function deleteObj(req, res){
+    await database.deleteObj(tableName, req.query.id, req, res)
+
 }
 
 
-
+/**
+ *
+ * @type {{createObj: ((function(*, *): Promise<void>)|*), selectAll: ((function(*, *): Promise<void>)|*), deleteObj: ((function(*, *): Promise<void>)|*), selectOneById: ((function(*, *): Promise<void>)|*), updateObj: ((function(*, *): Promise<void>)|*)}}
+ */
 module.exports = {
     selectAll,
-    selectOne,
+    selectOneById,
     createObj,
     updateObj,
     deleteObj
