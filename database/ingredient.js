@@ -21,8 +21,8 @@ function selectOne(req, res){
 }
 
 function create(req,res) {
-    axios.post(database.url,req.body,database.headers).then(r => {
-        res.send("ingredient created");
+    axios.post(database.url + dbName,req.body,database.headers).then(r => {
+        res.json("ingredient created");
     }).catch(err => {
         res.statusCode(500);
         res.json(err)
@@ -31,7 +31,7 @@ function create(req,res) {
 
 
 module.exports = {
-    selectAll, selectOne
+    selectAll, selectOne, create
 }
 
 
