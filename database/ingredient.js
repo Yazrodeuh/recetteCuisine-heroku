@@ -11,7 +11,7 @@ async function selectAll(req, res) {
         const response = await database.selectAll(tableName);
         res.json(response.data);
     } catch (error) {
-        res.status(error.code);
+        res.status(error.response.status);
         res.json(error.name + ' : ' + error.message);
     }
 }
@@ -26,7 +26,7 @@ async function selectOneById(req, res) {
         const response = await database.selectOneById(tableName, req.query.id);
         res.json(response.data);
     } catch (error) {
-        res.status(error.code);
+        res.status(error.response.status);
         res.json(error.name + ' : ' + error.message);
     }
 }
@@ -41,7 +41,7 @@ async function createObj(req, res) {
         const response = await database.createObj(tableName, req.body);
         res.json(response.data);
     } catch (error) {
-        res.status(error.code);
+        res.status(error.response.status);
         res.json(error.name + ' : ' + error.message);
     }
 }
@@ -56,7 +56,7 @@ async function updateObj(req, res) {
         const response = await database.updateObj(tableName, req.body);
         res.json(response.data);
     } catch (error) {
-        res.status(error.code);
+        res.status(error.response.status);
         res.json(error.name + ' : ' + error.message);
     }
 }
@@ -71,7 +71,7 @@ async function deleteObj(req, res) {
         const response = await database.deleteObj(tableName, req.query.id);
         res.json(response.data);
     } catch (error) {
-        res.status(error.code);
+        res.status(error.response.status);
         res.json(error.name + ' : ' + error.message);
     }
 }
