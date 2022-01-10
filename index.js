@@ -27,10 +27,6 @@ app.use('/recipes', require('./routers/recipeRouter.js'))
 
 
 
-
-//STEP
-
-
 //USER
 const user = require("./database/user.js");
 app.get('/users', Authentification.passeport.authenticate('jwt', {session: false}), user.selectAll);

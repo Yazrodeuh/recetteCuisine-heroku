@@ -39,6 +39,10 @@ async function selectOneById(req, res) {
  * @param res
  */
 async function createObj(req, res) {
+
+    //TODO add request to create recipe before create recipeIngredient
+    //TODO add request to create step before create recipeIngredient
+
     try {
         const response = await database.createObj(tableName, req.body);
         res.json(response.data);
