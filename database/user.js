@@ -6,7 +6,7 @@ const tableName = "user-list"
  * @param req
  * @param res
  */
-async function selectAll(req, res) {
+function selectAll(req, res) {
     database.selectAll(tableName).then((response) => {
         res.json(response.data);
     }).catch((error) => {
@@ -20,8 +20,8 @@ async function selectAll(req, res) {
  * @param req
  * @param res
  */
-async function selectOneById(req, res) {
-    await database.selectOneById(tableName, req.query.id).then((response) => {
+function selectOneById(req, res) {
+    database.selectOneById(tableName, req.query.id).then((response) => {
         res.json(response.data);
     }).catch((error) => {
         res.status(500);
@@ -34,8 +34,8 @@ async function selectOneById(req, res) {
  * @param req
  * @param res
  */
-async function createObj(req, res) {
-    await database.createObj(tableName, req.body).then((response) => {
+function createObj(req, res) {
+    database.createObj(tableName, req.body).then((response) => {
         res.json(response.data);
     }).catch((error) => {
         res.status(500);
@@ -48,8 +48,8 @@ async function createObj(req, res) {
  * @param req
  * @param res
  */
-async function updateObj(req, res) {
-    await database.updateObj(tableName, req.body).then((response) => {
+function updateObj(req, res) {
+    database.updateObj(tableName, req.body).then((response) => {
         res.json(response.data);
     }).catch((error) => {
         res.status(500);
@@ -62,8 +62,8 @@ async function updateObj(req, res) {
  * @param req
  * @param res
  */
-async function deleteObj(req, res){
-    await database.deleteObj(tableName, req.query.id).then((response) => {
+function deleteObj(req, res){
+    database.deleteObj(tableName, req.query.id).then((response) => {
         res.json(response.data);
     }).catch((error) => {
         res.status(500);
