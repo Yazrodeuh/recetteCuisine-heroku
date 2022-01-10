@@ -19,7 +19,7 @@ const jwtOptions = {
 
 passeport.use(
     new JwtStrategy(jwtOptions, function (payload, next){
-        const user = User.find((user => user.username === payload.username))
+        const user = User.find((user => user.email === payload.email));
         user ? next(null, user) : next(null, false);
     })
 )
@@ -49,7 +49,6 @@ function login(email, password){
     }
 
     const userJwt = jwt.sign({email: user.email}, secret);
-
     return {
         status: 200,
         message: userJwt
