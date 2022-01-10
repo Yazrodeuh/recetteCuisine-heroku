@@ -53,6 +53,14 @@ app.post('/step', Authentification.passeport.authenticate('jwt', {session: false
 app.put('/step', Authentification.passeport.authenticate('jwt', {session: false}), step.updateObj);
 app.delete('/step', Authentification.passeport.authenticate('jwt', {session: false}), step.deleteObj);
 
+//USER
+const user = require("./database/user.js");
+app.get('/users', Authentification.passeport.authenticate('jwt', {session: false}), user.selectAll);
+app.get('/user/:id', Authentification.passeport.authenticate('jwt', {session: false}), user.selectOneById);
+app.post('/user', Authentification.passeport.authenticate('jwt', {session: false}), user.createObj);
+app.put('/user', Authentification.passeport.authenticate('jwt', {session: false}), user.updateObj);
+app.delete('/user', Authentification.passeport.authenticate('jwt', {session: false}), user.deleteObj);
+
 //TEST authentification
 app.post('/login', (req, res) => {
     const result = Authentification.login(req.body.email, req.body.password);
