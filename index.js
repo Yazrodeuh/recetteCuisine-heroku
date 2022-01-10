@@ -7,7 +7,7 @@ const Authentification = require('./authentification/authentification.js');
 app.use(cors());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(express.json());
-app.use(Authentification.passeport.initialize)
+app.use(Authentification.passeport.initialize())
 require("dotenv").config();
 const PORT = process.env.PORT || 8000 // this is very important
 
