@@ -1,5 +1,5 @@
 const database = require("./requestDatabase");
-const dbName = "step"
+const tableName = "step"
 
 /**
  *
@@ -42,7 +42,7 @@ async function updateObj(req, res) {
  * @param req
  * @param res
  */
-async function deleteObj(req, res){
+async function deleteObj(req, res) {
     await database.deleteObj(tableName, req.query.id, req, res);
 }
 

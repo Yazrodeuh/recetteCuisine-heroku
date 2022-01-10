@@ -6,8 +6,15 @@ const tableName = "ingredient"
  * @param req
  * @param res
  */
-async function selectAll(req, res) {
-    await database.selectAll(tableName, req, res);
+function selectAll(req, res) {
+    database.selectAll(tableName)
+        .then((result) => {
+            res.json(result.data);
+        })
+        .catch((error) => {
+            res.status(500)
+            res.json(error);
+        });
 }
 
 /**
@@ -15,8 +22,15 @@ async function selectAll(req, res) {
  * @param req
  * @param res
  */
-async function selectOneById(req, res) {
-    await database.selectOneById(tableName, req.query.id, req, res)
+function selectOneById(req, res) {
+    database.selectOneById(tableName, req.query.id)
+        .then((result) => {
+            res.json(result.data);
+        })
+        .catch((error) => {
+            res.status(500)
+            res.json(error);
+        })
 }
 
 /**
@@ -24,9 +38,15 @@ async function selectOneById(req, res) {
  * @param req
  * @param res
  */
-async function createObj(req, res) {
-    await database.createObj(tableName, req.body, req, res)
-
+function createObj(req, res) {
+    database.createObj(tableName, req.body)
+        .then((result) => {
+            res.json(result.data);
+        })
+        .catch((error) => {
+            res.statusCode(500)
+            res.json(error);
+        });
 }
 
 /**
@@ -34,8 +54,15 @@ async function createObj(req, res) {
  * @param req
  * @param res
  */
-async function updateObj(req, res) {
-    await database.updateObj(tableName, req.body, req, res);
+function updateObj(req, res) {
+    database.updateObj(tableName, req.body)
+        .then((result) => {
+            res.json(result.data);
+        })
+        .catch((error) => {
+            res.statusCode(500)
+            res.json(error);
+        });
 }
 
 /**
@@ -43,11 +70,16 @@ async function updateObj(req, res) {
  * @param req
  * @param res
  */
-async function deleteObj(req, res){
-    await database.deleteObj(tableName, req.query.id, req, res)
-
+function deleteObj(req, res) {
+    database.deleteObj(tableName, req.query.id)
+        .then((result) => {
+            res.json(result.data);
+        })
+        .catch((error) => {
+            res.statusCode(500)
+            res.json(error);
+        });
 }
-
 
 /**
  *

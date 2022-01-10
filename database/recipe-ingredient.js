@@ -1,4 +1,7 @@
+const axios = require('axios');
+
 const database = require("./requestDatabase");
+const {headers} = require("./requestDatabase");
 const tableName = "recipe-ingredient"
 
 /**
@@ -6,8 +9,15 @@ const tableName = "recipe-ingredient"
  * @param req
  * @param res
  */
-async function selectAll(req, res) {
-    await database.selectAll(tableName, req, res);
+function selectAll(req, res) {
+    database.selectAll(tableName)
+        .then((result) => {
+            res.json(result.data);
+        })
+        .catch((error) => {
+            res.status(500)
+            res.json(error);
+        });
 }
 
 /**
@@ -15,8 +25,15 @@ async function selectAll(req, res) {
  * @param req
  * @param res
  */
-async function selectOneById(req, res) {
-    await database.selectOneById(tableName, req.query.id, req, res);
+function selectOneById(req, res) {
+    database.selectOneById(tableName, req.query.id)
+        .then((result) => {
+            res.json(result.data);
+        })
+        .catch((error) => {
+            res.status(500)
+            res.json(error);
+        })
 }
 
 /**
@@ -24,8 +41,15 @@ async function selectOneById(req, res) {
  * @param req
  * @param res
  */
-async function createObj(req, res) {
-    await database.createObj(tableName, req.body, req, res);
+function createObj(req, res) {
+    database.createObj(tableName, req.body)
+        .then((result) => {
+            res.json(result.data);
+        })
+        .catch((error) => {
+            res.statusCode(500)
+            res.json(error);
+        });
 }
 
 /**
@@ -33,8 +57,15 @@ async function createObj(req, res) {
  * @param req
  * @param res
  */
-async function updateObj(req, res) {
-    await database.updateObj(tableName, req.body, req, res);
+function updateObj(req, res) {
+    database.updateObj(tableName, req.body)
+        .then((result) => {
+            res.json(result.data);
+        })
+        .catch((error) => {
+            res.statusCode(500)
+            res.json(error);
+        });
 }
 
 /**
@@ -42,8 +73,15 @@ async function updateObj(req, res) {
  * @param req
  * @param res
  */
-async function deleteObj(req, res){
-    await database.deleteObj(tableName, req.query.id, req, res);
+function deleteObj(req, res) {
+    database.deleteObj(tableName, req.query.id)
+        .then((result) => {
+            res.json(result.data);
+        })
+        .catch((error) => {
+            res.statusCode(500)
+            res.json(error);
+        });
 }
 
 /**
@@ -51,9 +89,15 @@ async function deleteObj(req, res){
  * @param req
  * @param res
  */
-function selectCompleteRecipe(req, res){
-    database.select(dbName + "?q={\"recipe.0\":{\"name\":\"" + req.params.name + "\"}}", req, res);
-    //TODO Refactor
+function selectCompleteRecipe(req, res) {
+    axios.get(database.url + tableName + "?q={\"recipe.0\":{\"name\":\"", headers)
+        .then((result) => {
+            res.json(result.data);
+        })
+        .catch((error) => {
+            res.statusCode(500)
+            res.json(error);
+        });
 }
 
 
@@ -62,12 +106,7 @@ function selectCompleteRecipe(req, res){
  * @type {{createObj: ((function(*, *): Promise<void>)|*), selectCompleteRecipe: selectCompleteRecipe, selectAll: ((function(*, *): Promise<void>)|*), deleteObj: ((function(*, *): Promise<void>)|*), selectOneById: ((function(*, *): Promise<void>)|*), updateObj: ((function(*, *): Promise<void>)|*)}}
  */
 module.exports = {
-    selectAll,
-    selectOneById,
-    createObj,
-    updateObj,
-    deleteObj,
-    selectCompleteRecipe
+    selectAll, selectOneById, createObj, updateObj, deleteObj, selectCompleteRecipe
 }
 
 
