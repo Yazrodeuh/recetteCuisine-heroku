@@ -1,5 +1,4 @@
-
-const userList = [
+module.exports = userList = [
 
     {
         email: 'maxime.poujol01@etu.umontpellier.fr',
@@ -10,8 +9,4 @@ const userList = [
         password: 'EnzoIut'
     }
 
-
 ];
-
-
-module.exports = userList

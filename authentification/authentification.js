@@ -5,7 +5,7 @@ const secret = 'recette-de-cuisine'
 const ExtractJwt = passportJwt.ExtractJwt
 const JwtStrategy = passportJwt.Strategy
 
-const User = require('user.js')
+const User = require('./user.js')
 
 /**
  *
