@@ -55,14 +55,21 @@ function createObj(req, res) {
  * @param res
  */
 function updateObj(req, res) {
-    database.updateObj(tableName, req.body)
-        .then((result) => {
-            res.json(result.data);
-        })
-        .catch((error) => {
-            res.statusCode(500)
-            res.json(error);
-        });
+
+    if (req.user.email === req.body.recipe.user.email) {
+        database.updateObj(tableName, req.body)
+            .then((result) => {
+                res.json(result.data);
+            })
+            .catch((error) => {
+                res.statusCode(500)
+                res.json(error);
+            });
+    } else {
+        res.status(401);
+        res.json("Unauthorized");
+    }
+
 }
 
 /**
@@ -71,14 +78,19 @@ function updateObj(req, res) {
  * @param res
  */
 function deleteObj(req, res) {
-    database.deleteObj(tableName, req.query.id)
-        .then((result) => {
-            res.json(result.data);
-        })
-        .catch((error) => {
-            res.statusCode(500)
-            res.json(error);
-        });
+    if (req.user.email === req.body.recipe.user.email) {
+        database.deleteObj(tableName, req.query.id)
+            .then((result) => {
+                res.json(result.data);
+            })
+            .catch((error) => {
+                res.statusCode(500)
+                res.json(error);
+            });
+    } else {
+        res.status(401);
+        res.json("Unauthorized");
+    }
 }
 
 

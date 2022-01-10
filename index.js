@@ -23,39 +23,38 @@ app.get('/error',(req,res) => {
 
 //RECIPE
 const recipe = require("./database/recipe.js");
-app.get('/recipes', recipe.selectAll);
-app.get('/recipe/:id', recipe.selectOneById);
-app.post('/recipe', recipe.createObj);
-app.put('/recipe', recipe.updateObj);
-app.delete('/recipe', recipe.deleteObj);
+app.get('/recipes',Authentification.passeport.authenticate('jwt', {session: false}), recipe.selectAll);
+app.get('/recipe/:id',Authentification.passeport.authenticate('jwt', {session: false}), recipe.selectOneById);
+app.post('/recipe',Authentification.passeport.authenticate('jwt', {session: false}), recipe.createObj);
+app.put('/recipe',Authentification.passeport.authenticate('jwt', {session: false}), recipe.updateObj);
+app.delete('/recipe',Authentification.passeport.authenticate('jwt', {session: false}), recipe.deleteObj);
 
 //INGREDIENT
 const ingredient = require("./database/ingredient.js");
-app.get('/ingredients', ingredient.selectAll);
-app.get('/ingredient/:id', ingredient.selectOneById);
-app.post('/ingredient', ingredient.createObj);
-app.put('/ingredient', ingredient.updateObj);
-app.delete('/ingredient', ingredient.deleteObj);
+app.get('/ingredients',Authentification.passeport.authenticate('jwt', {session: false}), ingredient.selectAll);
+app.get('/ingredient/:id',Authentification.passeport.authenticate('jwt', {session: false}), ingredient.selectOneById);
+app.post('/ingredient',Authentification.passeport.authenticate('jwt', {session: false}), ingredient.createObj);
+app.put('/ingredient',Authentification.passeport.authenticate('jwt', {session: false}), ingredient.updateObj);
+app.delete('/ingredient',Authentification.passeport.authenticate('jwt', {session: false}), ingredient.deleteObj);
 
 //RECIPE INGREDIENT
 const recipeIngredient = require("./database/recipe-ingredient.js");
-app.get('/recipeIngredients', recipeIngredient.selectAll); //TODO une route pour récupérer la liste des recettes
-app.get('/recipeIngredient/:id', recipeIngredient.selectOneById); //TODO une route pour récupérer une recette
-app.post('/recipeIngredient', recipeIngredient.createObj); //TODO une route pour ajouter une recette
-app.put('/recipeIngredient', recipeIngredient.updateObj); //TODO une route pour modifier une recette
-app.delete('/recipeIngredient', recipeIngredient.deleteObj); //TODO une route pour supprimer une recette
+app.get('/recipeIngredients',Authentification.passeport.authenticate('jwt', {session: false}), recipeIngredient.selectAll);
+app.get('/recipeIngredient/:id',Authentification.passeport.authenticate('jwt', {session: false}), recipeIngredient.selectOneById);
+app.post('/recipeIngredient',Authentification.passeport.authenticate('jwt', {session: false}), recipeIngredient.createObj);
+app.put('/recipeIngredient',Authentification.passeport.authenticate('jwt', {session: false}), recipeIngredient.updateObj);
+app.delete('/recipeIngredient',Authentification.passeport.authenticate('jwt', {session: false}), recipeIngredient.deleteObj);
 
 //STEP
 const step = require("./database/step.js");
-app.get('/steps', step.selectAll);
-app.get('/step/:id', step.selectOneById);
-app.post('/step', step.createObj);
-app.put('/step', step.updateObj);
-app.delete('/step', step.deleteObj);
+app.get('/steps',Authentification.passeport.authenticate('jwt', {session: false}), step.selectAll);
+app.get('/step/:id',Authentification.passeport.authenticate('jwt', {session: false}), step.selectOneById);
+app.post('/step',Authentification.passeport.authenticate('jwt', {session: false}), step.createObj);
+app.put('/step',Authentification.passeport.authenticate('jwt', {session: false}), step.updateObj);
+app.delete('/step',Authentification.passeport.authenticate('jwt', {session: false}), step.deleteObj);
 
 //TEST authentification
 app.post('/login', (req, res) =>{
-    //TODO une route pour se connecter (récupérer un JWT)
     const result = Authentification.login(req.body.email, req.body.password);
     res.status(result.status);
     res.json(result.message);
