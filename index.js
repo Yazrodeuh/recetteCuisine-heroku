@@ -9,7 +9,7 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(express.json());
 app.use(Authentification.passeport.initialize)
 require("dotenv").config();
-const PORT = process.env.PORT || 8000// this is very important
+const PORT = process.env.PORT || 8000 // this is very important
 
 
 app.get('/', function (req, res){
@@ -38,7 +38,7 @@ app.put('/ingredient', ingredient.updateObj);
 app.delete('/ingredient', ingredient.deleteObj);
 
 //RECIPE INGREDIENT
-const recipeIngredient = require("./database/recipeIngredient.js");
+const recipeIngredient = require("./database/recipe-ingredient.js");
 app.get('/recipeIngredients', recipeIngredient.selectAll);
 app.get('/recipeIngredient/:id', recipeIngredient.selectAll);
 app.post('/recipeIngredient', recipeIngredient.createObj);
