@@ -7,7 +7,12 @@ const dbName = "user-list"
  * @param res
  */
 async function selectAll(req, res) {
-    await database.selectAll(tableName, req, res);
+    database.selectAll(tableName).then((response) => {
+        res.json(response.data);
+    }).catch((error) => {
+        res.status(500);
+        res.json(error);
+    });
 }
 
 /**
@@ -16,7 +21,12 @@ async function selectAll(req, res) {
  * @param res
  */
 async function selectOneById(req, res) {
-    await database.selectOneById(tableName, req.query.id, req, res);
+    await database.selectOneById(tableName, req.query.id).then((response) => {
+        res.json(response.data);
+    }).catch((error) => {
+        res.status(500);
+        res.json(error);
+    });
 }
 
 /**
@@ -25,7 +35,12 @@ async function selectOneById(req, res) {
  * @param res
  */
 async function createObj(req, res) {
-    await database.createObj(tableName, req.body, req, res);
+    await database.createObj(tableName, req.body).then((response) => {
+        res.json(response.data);
+    }).catch((error) => {
+        res.status(500);
+        res.json(error);
+    });
 }
 
 /**
@@ -34,7 +49,12 @@ async function createObj(req, res) {
  * @param res
  */
 async function updateObj(req, res) {
-    await database.updateObj(tableName, req.body, req, res);
+    await database.updateObj(tableName, req.body).then((response) => {
+        res.json(response.data);
+    }).catch((error) => {
+        res.status(500);
+        res.json(error);
+    });
 }
 
 /**
@@ -43,7 +63,12 @@ async function updateObj(req, res) {
  * @param res
  */
 async function deleteObj(req, res){
-    await database.deleteObj(tableName, req.query.id, req, res);
+    await database.deleteObj(tableName, req.query.id).then((response) => {
+        res.json(response.data);
+    }).catch((error) => {
+        res.status(500);
+        res.json(error);
+    });
 }
 
 /**
