@@ -1,4 +1,5 @@
 const database = require("./requestDatabase");
+const axios = require("axios");
 const tableName = "ingredient"
 
 /**
@@ -8,10 +9,10 @@ const tableName = "ingredient"
  */
 async function selectAll(req, res) {
     try{
-        res.send(await database.selectAll('noejzec,zk'));
-
+        const response = await database.selectAll(tableName);
+        res.json(response.data);
     }catch (error){
-        res.status(error.code);
+        res.status(error.response.status);
         res.json(error.name + ' : ' + error.message);
     }
 }
