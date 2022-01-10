@@ -1,23 +1,23 @@
 const passeport = require("passport");
-const jwt = require('jsonwebtoken');
-const passportJwt = require('passport-jwt');
-const secret = 'recette-de-cuisine';
-const ExtractJwt = passportJwt.ExtractJwt;
-const JwtStrategy = passportJwt.Strategy;
-
-const User = require('./user.js');
+const jwt = require('jsonwebtoken')
+const passportJwt = require('passport-jwt')
+const secret = 'recette-de-cuisine'
+const ExtractJwt = passportJwt.ExtractJwt
+const JwtStrategy = passportJwt.Strategy
+const database =  require('../database/requestDatabase.js')
 
 /**
  *
- * @type {{jwtFromRequest, secretOrKey: string}}
+ * @type {{jwtFromRequest,secretOrKey: string}}
  */
 const jwtOptions = {
     jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(), secretOrKey: secret
 };
 
 
-passeport.use(new JwtStrategy(jwtOptions, function (payload, next) {
-    const user = User.find(user => user.email === payload.email);
+passeport.use(new JwtStrategy(jwtOptions, async function (payload, next) {
+    const users = (await database.selectAll("user-list")).data;
+    const user = users.find((user => user.email === payload.email));
     user ? next(null, user) : next(null, false);
 }));
 
@@ -27,7 +27,7 @@ passeport.use(new JwtStrategy(jwtOptions, function (payload, next) {
  * @param {string} password
  * @returns {{message: string, status: number}}
  */
-function login(email, password) {
+async function login(email, password) {
 
     if (!email || !password) {
         return {
@@ -35,7 +35,11 @@ function login(email, password) {
         };
     }
 
-    const user = User.find(user => user.email === email);
+
+    const users = (await database.selectAll("user-list")).data;
+    const user = users.find(user => user.email === email);
+
+    //const user = User.find(user => user.email === email);
 
     if (!user || user.password !== password) {
         return {

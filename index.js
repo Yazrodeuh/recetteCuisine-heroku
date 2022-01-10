@@ -4,8 +4,9 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const Authentification = require('./authentification/authentification.js');
 
-const PORT = process.env.PORT || 8000 // this is very important
 require("dotenv").config();
+const PORT = process.env.PORT || 8000 // this is very important
+
 
 app.use(cors());
 app.use(bodyParser.urlencoded({extended: false}));
@@ -18,10 +19,10 @@ app.get('/', function (req, res) {
 })
 
 //Router for ingredients
-app.use('/ingredient', require('routers/ingredientRouter.js'))
+app.use('/ingredient', require('./routers/ingredientRouter.js'))
 
 //Router for recipes
-app.use('/recipes', require('routers/recipeRouter.js'))
+app.use('/recipes', require('./routers/recipeRouter.js'))
 
 
 
@@ -39,8 +40,8 @@ app.put('/user', Authentification.passeport.authenticate('jwt', {session: false}
 app.delete('/user', Authentification.passeport.authenticate('jwt', {session: false}), user.deleteObj);
 
 //TEST authentification
-app.post('/login', (req, res) => {
-    const result = Authentification.login(req.body.email, req.body.password);
+app.post('/login', async (req, res) => {
+    const result = await Authentification.login(req.body.email, req.body.password);
     res.status(result.status);
     res.json(result.message);
 })
