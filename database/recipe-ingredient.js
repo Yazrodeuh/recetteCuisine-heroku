@@ -1,7 +1,6 @@
 const axios = require('axios');
 
 const database = require("./requestDatabase");
-const {headers} = require("./requestDatabase");
 const tableName = "recipe-ingredient"
 
 /**

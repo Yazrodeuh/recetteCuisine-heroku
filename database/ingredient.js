@@ -6,15 +6,14 @@ const tableName = "ingredient"
  * @param req
  * @param res
  */
-function selectAll(req, res) {
-    database.selectAll(tableName)
-        .then((result) => {
-            res.json(result.data);
-        })
-        .catch((error) => {
-            res.status(500)
-            res.json(error);
-        });
+async function selectAll(req, res) {
+    try{
+        res.send(await database.selectAll('noejzec,zk'));
+
+    }catch (error){
+        res.status(error.code);
+        res.json(error.name + ' : ' + error.message);
+    }
 }
 
 /**

@@ -24,7 +24,7 @@ app.get('/error',(req,res) => {
 //RECIPE
 const recipe = require("./database/recipe.js");
 app.get('/recipes', recipe.selectAll);
-app.get('/recipe/:id', recipe.selectAll);
+app.get('/recipe/:id', recipe.selectOneById);
 app.post('/recipe', recipe.createObj);
 app.put('/recipe', recipe.updateObj);
 app.delete('/recipe', recipe.deleteObj);
@@ -32,29 +32,30 @@ app.delete('/recipe', recipe.deleteObj);
 //INGREDIENT
 const ingredient = require("./database/ingredient.js");
 app.get('/ingredients', ingredient.selectAll);
-app.get('/ingredient/:id', ingredient.selectAll);
+app.get('/ingredient/:id', ingredient.selectOneById);
 app.post('/ingredient', ingredient.createObj);
 app.put('/ingredient', ingredient.updateObj);
 app.delete('/ingredient', ingredient.deleteObj);
 
 //RECIPE INGREDIENT
 const recipeIngredient = require("./database/recipe-ingredient.js");
-app.get('/recipeIngredients', recipeIngredient.selectAll);
-app.get('/recipeIngredient/:id', recipeIngredient.selectAll);
-app.post('/recipeIngredient', recipeIngredient.createObj);
-app.put('/recipeIngredient', recipeIngredient.updateObj);
-app.delete('/recipeIngredient', recipeIngredient.deleteObj);
+app.get('/recipeIngredients', recipeIngredient.selectAll); //TODO une route pour récupérer la liste des recettes
+app.get('/recipeIngredient/:id', recipeIngredient.selectOneById); //TODO une route pour récupérer une recette
+app.post('/recipeIngredient', recipeIngredient.createObj); //TODO une route pour ajouter une recette
+app.put('/recipeIngredient', recipeIngredient.updateObj); //TODO une route pour modifier une recette
+app.delete('/recipeIngredient', recipeIngredient.deleteObj); //TODO une route pour supprimer une recette
 
 //STEP
 const step = require("./database/step.js");
 app.get('/steps', step.selectAll);
-app.get('/step/:id', step.selectAll);
+app.get('/step/:id', step.selectOneById);
 app.post('/step', step.createObj);
 app.put('/step', step.updateObj);
 app.delete('/step', step.deleteObj);
 
 //TEST authentification
 app.post('/login', (req, res) =>{
+    //TODO une route pour se connecter (récupérer un JWT)
     const result = Authentification.login(req.body.email, req.body.password);
     res.status(result.status);
     res.json(result.message);
