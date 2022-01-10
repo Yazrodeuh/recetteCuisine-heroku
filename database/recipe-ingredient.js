@@ -1,7 +1,7 @@
 const axios = require('axios');
 
 const database = require("./requestDatabase");
-const tableName = "recipe-ingredient"
+const tableName = "recipe-ingredient";
 
 /**
  *
@@ -40,7 +40,7 @@ async function selectOneById(req, res) {
  */
 async function createObj(req, res) {
     try {
-        const response = await database.createObj(tableName, req.body)
+        const response = await database.createObj(tableName, req.body);
         res.json(response.data);
     } catch (error) {
         res.status(error.code);
@@ -55,7 +55,7 @@ async function createObj(req, res) {
  */
 async function updateObj(req, res) {
     try {
-        const response = await database.updateObj(tableName, req.body)
+        const response = await database.updateObj(tableName, req.body);
         res.json(response.data);
     } catch (error) {
         res.status(error.code);
@@ -70,11 +70,10 @@ async function updateObj(req, res) {
  */
 async function deleteObj(req, res) {
     try {
-        const response = await database.deleteObj(tableName, req.query.id)
+        const response = await database.deleteObj(tableName, req.query.id);
         res.json(response.data);
     } catch (error) {
-        res.status(error.code);
-        res.json(error.name + ' : ' + error.message);
+
     }
 }
 
@@ -83,22 +82,17 @@ async function deleteObj(req, res) {
  * @param req
  * @param res
  */
-function selectCompleteRecipe(req, res) {
-    axios.get(database.url + tableName + "?q={\"recipe.0\":{\"name\":\"", headers)
-        .then((result) => {
-            res.json(result.data);
-        })
-        .catch((error) => {
-            res.statusCode(500)
-            res.json(error);
-        });
+async function selectCompleteRecipe(req, res) {
+    try {
+        const response = await axios.get(database.url + tableName + "?q={\"recipe.0\":{\"name\":\"", database.headers);
+        res.json(response.data);
+    } catch (error) {
+        res.status(error.code);
+        res.json(error.name + ' : ' + error.message);
+    }
 }
 
 
-/**
- *
- * @type {{createObj: ((function(*, *): Promise<void>)|*), selectCompleteRecipe: selectCompleteRecipe, selectAll: ((function(*, *): Promise<void>)|*), deleteObj: ((function(*, *): Promise<void>)|*), selectOneById: ((function(*, *): Promise<void>)|*), updateObj: ((function(*, *): Promise<void>)|*)}}
- */
 module.exports = {
     selectAll, selectOneById, createObj, updateObj, deleteObj, selectCompleteRecipe
 }

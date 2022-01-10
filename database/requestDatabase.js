@@ -5,7 +5,7 @@ const headers = {
     headers: {
         "x-apikey": "92b2bae27ab0b1d2f3fb12ae20167b71425d6"
     }
-}
+};
 
 /**
  * SelectAll

@@ -38,7 +38,7 @@ async function selectOneById(req, res) {
  */
 async function createObj(req, res) {
     try {
-        const response = await database.createObj(tableName, req.body)
+        const response = await database.createObj(tableName, req.body);
         res.json(response.data);
     } catch (error) {
         res.status(error.code);
@@ -53,7 +53,7 @@ async function createObj(req, res) {
  */
 async function updateObj(req, res) {
     try {
-        const response = await database.updateObj(tableName, req.body)
+        const response = await database.updateObj(tableName, req.body);
         res.json(response.data);
     } catch (error) {
         res.status(error.code);
@@ -68,7 +68,7 @@ async function updateObj(req, res) {
  */
 async function deleteObj(req, res) {
     try {
-        const response = await database.deleteObj(tableName, req.query.id)
+        const response = await database.deleteObj(tableName, req.query.id);
         res.json(response.data);
     } catch (error) {
         res.status(error.code);
@@ -76,10 +76,7 @@ async function deleteObj(req, res) {
     }
 }
 
-/**
- *
- * @type {{createObj: ((function(*, *): Promise<void>)|*), selectAll: ((function(*, *): Promise<void>)|*), deleteObj: ((function(*, *): Promise<void>)|*), selectOneById: ((function(*, *): Promise<void>)|*), updateObj: ((function(*, *): Promise<void>)|*)}}
- */
+
 module.exports = {
     selectAll, selectOneById, createObj, updateObj, deleteObj
 }
