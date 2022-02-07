@@ -24,16 +24,8 @@ app.use('/ingredient', require('./routers/ingredientRouter.js'))
 //Router for recipes
 app.use('/recipes', require('./routers/recipeRouter.js'))
 
-
-
-
-//USER
-const user = require("./database/user.js");
-app.get('/users', Authentification.passeport.authenticate('jwt', {session: false}), user.selectAll);
-app.get('/user/:id', Authentification.passeport.authenticate('jwt', {session: false}), user.selectOneById);
-app.post('/user', Authentification.passeport.authenticate('jwt', {session: false}), user.createObj);
-app.put('/user', Authentification.passeport.authenticate('jwt', {session: false}), user.updateObj);
-app.delete('/user', Authentification.passeport.authenticate('jwt', {session: false}), user.deleteObj);
+//Router for users
+app.use('/user', require('./routers/userRouter'))
 
 //TEST authentification
 app.post('/login', async (req, res) => {
