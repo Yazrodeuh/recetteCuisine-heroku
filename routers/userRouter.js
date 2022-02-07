@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const user = require("./database/user.js");
+const user = require("../database/user.js");
 const Authentification = require("../authentification/authentification");
 
 //router.get('/', Authentification.passeport.authenticate('jwt', {session: false}), user.selectAll);
