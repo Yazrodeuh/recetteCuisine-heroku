@@ -23,7 +23,7 @@ async function selectAll(req, res) {
  */
 async function selectOneById(req, res) {
     try {
-        const response = await database.selectOneById(tableName, req.query.id);
+        const response = await database.selectOneById(tableName, req.params.id);
         res.json(response.data);
     } catch (error) {
         error.response ? res.status(error.response.status) : res.status(500);
@@ -68,7 +68,7 @@ async function updateObj(req, res) {
  */
 async function deleteObj(req, res) {
     try {
-        const response = await database.deleteObj(tableName, req.query.id);
+        const response = await database.deleteObj(tableName, req.params.id);
         res.json(response.data);
     } catch (error) {
         error.response ? res.status(error.response.status) : res.status(500);
