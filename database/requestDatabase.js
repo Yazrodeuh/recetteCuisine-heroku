@@ -24,7 +24,7 @@ function selectAll(tableName) {
  * @param id
  */
 function selectOneById(tableName, id) {
-    return axios.get(url + tableName + "?q={id:" + id + "}", headers);
+    return axios.get(url + tableName + "?q={\"id\":\"" + id + "\"}", headers);
 }
 
 
