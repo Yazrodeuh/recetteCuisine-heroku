@@ -28,6 +28,7 @@ async function selectOneById(req, res) {
         const response = await database.selectOneById(tableName, req.query.id);
         res.json(response.data);
     } catch (error) {
+        console.log(error)
         error.response ? res.status(error.response.status) : res.status(500);
         res.json(error.name + ' : ' + error.message);
     }
@@ -88,7 +89,7 @@ async function deleteObj(req, res) {
  */
 async function selectCompleteRecipe(req, res) {
     try {
-        const response = await axios.get(database.url + tableName + "?q={\"recipe.0\":{\"name\":\"", database.headers);
+        const response = await axios.get(database.url + tableName + "?q={\"recipe.0\":{\"id\": "+ req.params.id + "}}", database.headers);
         res.json(response.data);
     } catch (error) {
         error.response ? res.status(error.response.status) : res.status(500);
