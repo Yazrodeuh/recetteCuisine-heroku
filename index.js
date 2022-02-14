@@ -24,6 +24,9 @@ app.use('/ingredient', require('./routers/ingredientRouter.js'))
 //Router for recipes
 app.use('/recipes', require('./routers/recipeRouter.js'))
 
+// user recipes
+app.use('/myrecipes', require('./routers/userRecipesRouter.js'))
+
 //Router for users
 app.use('/user', require('./routers/userRouter'))
 

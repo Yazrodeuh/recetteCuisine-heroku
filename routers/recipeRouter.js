@@ -11,7 +11,6 @@ router.post('/', Authentification.passeport.authenticate('jwt', {session: false}
 router.put('/', Authentification.passeport.authenticate('jwt', {session: false}), recipe.updateObj);
 router.delete('/', Authentification.passeport.authenticate('jwt', {session: false}), recipe.deleteObj);
 
-router.get('/myrecepies', Authentification.passeport.authenticate('jwt', {session: false}), recipe.userRecipe);
 
 
 //router.get('/', Authentification.passeport.authenticate('jwt', {session: false}), recipeIngredient.selectAll);
