@@ -1,4 +1,5 @@
 const database = require("./requestDatabase");
+const axios = require("axios");
 const tableName = "recipe";
 
 /**
@@ -76,7 +77,16 @@ async function deleteObj(req, res) {
     }
 }
 
+async function userRecipe(req, res){
+    try {
+        const response = await axios.post(database.url + tableName + "?q={\"user\":" + req.body.userId + "}");
+        res.json(response.data);
+    }catch (error) {
+        error.response ? res.status(error.response.status) : res.status(500);
+        res.json(error.name + ' : ' + error.message);
+    }
+}
 
 module.exports = {
-    selectAll, selectOneById, createObj, updateObj, deleteObj
+    selectAll, selectOneById, createObj, updateObj, deleteObj, userRecipe
 }
