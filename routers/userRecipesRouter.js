@@ -4,3 +4,5 @@ const recipe = require("../database/recipe.js");
 const Authentification = require("../authentification/authentification");
 
 router.get('/', Authentification.passeport.authenticate('jwt', {session: false}), recipe.userRecipe);
+
+module.exports = router;
