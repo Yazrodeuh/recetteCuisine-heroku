@@ -94,6 +94,8 @@ async function userRecipe(req, res){
     }
 }
 
+//async
+
 module.exports = {
     selectAll, selectOneById, createObj, updateObj, deleteObj, userRecipe
 }
