@@ -77,6 +77,12 @@ async function deleteObj(req, res) {
     }
 }
 
+/**
+ *
+ * @param req
+ * @param res
+ * @returns {Promise<void>}
+ */
 async function userRecipe(req, res){
     try {
         const response = await axios.post(database.url + tableName + "?q={\"user\":" + req.user.username + "}");
