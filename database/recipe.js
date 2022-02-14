@@ -79,7 +79,7 @@ async function deleteObj(req, res) {
 
 async function userRecipe(req, res){
     try {
-        const response = await axios.post(database.url + tableName + "?q={\"user\":" + req.body.userId + "}");
+        const response = await axios.post(database.url + tableName + "?q={\"user\":" + req.user.username + "}");
         res.json(response.data);
     }catch (error) {
         error.response ? res.status(error.response.status) : res.status(500);
