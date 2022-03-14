@@ -1,6 +1,7 @@
 const database = require("./requestDatabase");
 const axios = require("axios");
 const tableName = "recipe";
+const user = require("./user");
 
 /**
  *
@@ -40,8 +41,10 @@ async function selectOneById(req, res) {
 async function createObj(req, res) {
     try {
         const body = req.body;
-        body.user = await database.selectOneById("user-list", req.user.email);
-        const response = await database.createObj(tableName, req.body);
+        body.user = await user.selectOneByIdWithoutParams(req, res, req.user.email)
+        body.ingredients = JSON.stringify(body.ingredients);
+        console.log(body)
+        const response = await database.createObj(tableName, body);
         res.json(response.data);
     } catch (error) {
         error.response ? res.status(error.response.status) : res.status(500);

@@ -1,4 +1,5 @@
 const database = require("./requestDatabase");
+const axios = require("axios");
 const tableName = "user-list";
 
 /**
@@ -28,6 +29,22 @@ async function selectOneById(req, res) {
     } catch (error) {
         error.response ? res.status(error.response.status) : res.status(500);
         res.json(error.name + ' : ' + error.message);
+    }
+}
+
+/**
+ *
+ * @param req
+ * @param res
+ * @param id
+ */
+async function selectOneByIdWithoutParams(req, res, id) {
+    try {
+        const response = await axios.get(database.url + tableName + "?q={\"email\": \"" + id + "\"}", database.headers);
+        return response.data[0];
+    } catch (error) {
+        error.response ? res.status(error.response.status) : res.status(500);
+        return error.name + ' : ' + error.message;
     }
 }
 
@@ -78,7 +95,7 @@ async function deleteObj(req, res) {
 
 
 module.exports = {
-    selectAll, selectOneById, createObj, updateObj, deleteObj
+    selectAll, selectOneById, selectOneByIdWithoutParams, createObj, updateObj, deleteObj
 }
 
 
