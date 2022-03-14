@@ -32,7 +32,7 @@ app.use('/user', require('./routers/userRouter'))
 
 //TEST authentification
 app.post('/login', async (req, res) => {
-    const result = await Authentification.login(req.body.email, req.body.password);
+    const result = Authentification.login(req.body.email, req.body.password);
     res.status(result.status);
     res.json(result.message);
 })

@@ -83,18 +83,17 @@ async function deleteObj(req, res) {
  * @param res
  * @returns {Promise<void>}
  */
-async function userRecipe(req, res){
+async function userRecipe(req, res) {
     try {
         console.log(req.user);
         const response = await axios.get(database.url + tableName + "?q={\"user.0\": {\"email\": \"" + req.user.email + "\" }}", database.headers);
         res.json(response.data);
-    }catch (error) {
+    } catch (error) {
         error.response ? res.status(error.response.status) : res.status(500);
         res.json(error.name + ' : ' + error.message);
     }
 }
 
-//async
 
 module.exports = {
     selectAll, selectOneById, createObj, updateObj, deleteObj, userRecipe
