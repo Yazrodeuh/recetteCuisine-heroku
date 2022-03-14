@@ -39,6 +39,8 @@ async function selectOneById(req, res) {
  */
 async function createObj(req, res) {
     try {
+        const body = req.body;
+        body.user = await database.selectOneById("user-list", req.user.email);
         const response = await database.createObj(tableName, req.body);
         res.json(response.data);
     } catch (error) {
