@@ -62,7 +62,7 @@ function updateObj(tableName, data) {
  * @returns {Promise<AxiosResponse<any>>}
  */
 async function deleteObj(tableName, id) {
-    return await axios.delete(url + tableName + "?q={id:" + id + "}", headers);
+    return await axios.delete(url + tableName + "/*?q={\"id\":" + id + "}", headers);
 }
 
 
