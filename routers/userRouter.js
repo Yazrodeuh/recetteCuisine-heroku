@@ -8,5 +8,4 @@ router.post('/', user.createObj);
 router.put('/', Authentification.passeport.authenticate('jwt', {session: false}), user.updateObj);
 router.delete('/', Authentification.passeport.authenticate('jwt', {session: false}), user.deleteObj);
 
-
 module.exports = router;
