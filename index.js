@@ -8,7 +8,7 @@ require("dotenv").config();
 const PORT = process.env.PORT || 8000 // this is very important
 
 
-app.use(cors({origin: "*"}));
+app.use(cors({origin: "https://marmiton-like-back.herokuapp.com"}));
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(express.json());
 app.use(Authentification.passeport.initialize())
