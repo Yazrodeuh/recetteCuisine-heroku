@@ -4,7 +4,7 @@ const passportJwt = require('passport-jwt')
 const secret = 'recette-de-cuisine'
 const ExtractJwt = passportJwt.ExtractJwt
 const JwtStrategy = passportJwt.Strategy
-const database =  require('../database/requestDatabase.js')
+const database = require('../database/requestDatabase.js')
 
 /**
  *
@@ -15,11 +15,14 @@ const jwtOptions = {
 };
 
 
-passeport.use(new JwtStrategy(jwtOptions, async function (payload, next) {
-    const users = (await database.selectAll("user-list")).data;
-    const user = users.find((user => user.email === payload.email));
-    user ? next(null, user) : next(null, false);
-}));
+passeport.use(
+    new JwtStrategy(
+        jwtOptions, async function (payload, next) {
+            const users = (await database.selectAll("user-list")).data;
+            const user = users.find((user => user.email === payload.email));
+            user ? next(null, user) : next(null, false);
+        })
+);
 
 /**
  *
@@ -34,7 +37,6 @@ async function login(email, password) {
             status: 401, message: 'Email or password was not provided.'
         };
     }
-
 
     const users = (await database.selectAll("user-list")).data;
     const user = users.find(user => user.email === email);

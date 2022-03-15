@@ -8,14 +8,14 @@ require("dotenv").config();
 const PORT = process.env.PORT || 8000 // this is very important
 
 
-app.use(cors({origin: ["*"]}));
+app.use(cors());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(express.json());
 app.use(Authentification.passeport.initialize())
 
 
 app.get('/', function (req, res) {
-    res.redirect("https://marmitonlike.netlify.app")
+    res.send('Homepage')
 })
 
 //Router for recipes
@@ -29,12 +29,9 @@ app.use('/user', require('./routers/userRouter'))
 
 //TEST authentification
 app.post('/login', async (req, res) => {
-    const result = Authentification.login(req.body.email, req.body.password);
+    const result = await Authentification.login(req.body.email, req.body.password);
     res.status(result.status);
     res.json(result.message);
-})
-app.get('/private', Authentification.passeport.authenticate('jwt', {session: false}), (req, res) => {
-    res.send('private. user : ' + req.user.email);
 })
 
 app.listen(PORT, function () {
