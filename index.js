@@ -15,7 +15,7 @@ app.use(Authentification.passeport.initialize())
 
 
 app.get('/', function (req, res) {
-    res.send('Homepage')
+    res.redirect("https://marmitonlike.netlify.app")
 })
 
 //Router for recipes
