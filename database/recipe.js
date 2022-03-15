@@ -59,7 +59,17 @@ async function createObj(req, res) {
  */
 async function updateObj(req, res) {
     try {
-        const response = await database.updateObj(tableName, req.body);
+        const body = req.body;
+        body.user = await user.selectOneByIdWithoutParams(req, res, req.user.email)
+        body.id = req.params.id;
+        body.ingredients = JSON.stringify(body.ingredients);
+
+        console.log(body)
+        let bddid = body.bddId;
+        delete body.bddId;
+
+        console.log(body)
+        const response = await database.updateObj(tableName, body , bddid);
         res.json(response.data);
     } catch (error) {
         error.response ? res.status(error.response.status) : res.status(500);

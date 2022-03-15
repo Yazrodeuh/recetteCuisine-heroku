@@ -44,12 +44,11 @@ function createObj(tableName, data) {
  *
  * @param tableName
  * @param data
- * @param req
- * @param res
+ * @param id
  * @returns {Promise<AxiosResponse<any>>}
  */
-function updateObj(tableName, data) {
-    return axios.put(url + tableName, data, headers);
+function updateObj(tableName, data, id) {
+    return axios.put(url + tableName + "/" + id, data, headers);
 }
 
 /**
